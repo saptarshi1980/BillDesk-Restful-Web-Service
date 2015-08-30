@@ -1,0 +1,1 @@
+<jsp:forward page="show.htm"></jsp:forward>

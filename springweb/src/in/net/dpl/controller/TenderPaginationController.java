@@ -37,7 +37,6 @@ public class TenderPaginationController {
         public String printWelcomeDisplay(HttpServletRequest request, HttpServletResponse response, @RequestParam("pageNumber") String pageNumber) {
         	System.out.println("Inside");
         	return "displayTender";
-
-        }
+}
     
 }

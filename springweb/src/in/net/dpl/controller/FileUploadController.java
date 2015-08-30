@@ -4,13 +4,20 @@ package in.net.dpl.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
- 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+
  
 /**
  * Handles requests for the application file upload requests
@@ -59,7 +66,7 @@ public class FileUploadController {
     /**
      * Upload multiple file using Spring Controller
      */
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/xxxxxxxxxx.htm", method = RequestMethod.POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("name") String[] names,
             @RequestParam("file") MultipartFile[] files) {
@@ -96,5 +103,84 @@ public class FileUploadController {
             }
         }
         return message;
+    }
+    @RequestMapping(value = "/show.htm", method = RequestMethod.GET)
+	public String displayForm() {
+		return "file_upload_form";
+	}
+	
+	
+	/*public String save(
+			@ModelAttribute("uploadForm") FileUploadForm uploadForm,
+					Model map) {
+		
+		List<MultipartFile> files = uploadForm.getFiles();
+
+		List<String> fileNames = new ArrayList<String>();
+		
+		if(null != files && files.size() > 0) {
+			for (MultipartFile multipartFile : files) {
+
+				//String fileName = multipartFile.getOriginalFilename();
+				if (!multipartFile.isEmpty()) {
+		            try {
+		                byte[] bytes = multipartFile.getBytes();
+		                String name=multipartFile.getOriginalFilename();
+		                System.out.println("File Name-"+name);
+		                // Creating the directory to store file
+		                String rootPath = System.getProperty("C:/uploads");
+		                //File dir = new File(rootPath + File.separator + "tmpFiles");
+		                File dir = new File(rootPath+ File.separator);
+		                if (!dir.exists())
+		                    dir.mkdirs();
+		 
+		                // Create the file on server
+		                File serverFile = new File("c:/uploads"+ File.separator + name);
+		                BufferedOutputStream stream = new BufferedOutputStream(
+		                        new FileOutputStream(serverFile));
+		                stream.write(bytes);
+		                stream.close();
+		 
+		                               
+		            } catch (Exception e) {
+		                
+		            }
+		        } else {
+		            
+		        }
+				
+				//fileNames.add(fileName);
+				//Handle file content - multipartFile.getInputStream()
+
+			}
+			
+		}
+		
+		map.addAttribute("files", fileNames);
+		return "file_upload_success";
+	}*/
+	private String saveDirectory = "C:/uploads/";
+	
+	@RequestMapping(value = "/uploadMultipleFile.htm", method = RequestMethod.POST)
+	public String save(
+            @ModelAttribute("uploadForm") FileUploadForm uploadForm,
+                    Model map) throws IllegalStateException, IOException {
+         
+        List<MultipartFile> files = uploadForm.getFiles();
+ 
+        List<String> fileNames = new ArrayList<String>();
+         
+        if(null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
+ 
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+                //Handle file content - multipartFile.getInputStream()
+                multipartFile.transferTo(new File(saveDirectory + multipartFile.getOriginalFilename()));   //Here I Added
+            }
+        }
+         
+        map.addAttribute("files", fileNames);
+        return "file_upload_success";
     }
 }
