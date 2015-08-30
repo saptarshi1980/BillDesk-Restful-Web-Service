@@ -8,16 +8,71 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>	
+<script src="<c:url value="resources/js/moment.js" />"></script>	
 <link rel="stylesheet" type="text/css" href="<c:url value="resources/css/jquery.datetimepicker.css" />" />
 <link href="<c:url value="resources/css/semantic-form.css" />" rel="stylesheet" type="text/css" />
 <link href="<c:url value="resources/css/jquery.datetimepicker.css" />" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+function checkDate(){
+	
+	var openDate=document.form1.datetimepicker_dark1.value;
+	var closeDate=document.form1.datetimepicker_dark2.value;
+	var prebidDate=document.form1.datetimepicker_dark3.value;
+	var submissionDate=document.form1.datetimepicker_dark4.value;
+	
+	openDateConv=moment(openDate,'DD-MM-YYYY HH:mm');
+	closeDateConv=moment(closeDate,'DD-MM-YYYY HH:mm');
+	prebidDateConv=moment(prebidDate,'DD-MM-YYYY HH:mm');
+	submissionDateConv=moment(submissionDate,'DD-MM-YYYY HH:mm');
+	
+	if(openDateConv>closeDateConv){
+		
+		alert("Opening Date should come before closing date.");
+		return false;
+	}
+	
+	if(openDateConv>prebidDateConv){
+		
+		alert("Opening Date should come before Pre Bid Discussion date.");
+		return false;
+	}
+	
+	if(openDateConv>submissionDateConv){
+		
+		alert("Opening Date should come before Bid Submission date.");
+		return false;
+	}
+	if(prebidDateConv>submissionDateConv){
+		
+		alert("Pre Bid Date should come before Bid Submission date.");
+		return false;
+	}
+	if(closeDateConv>submissionDateConv){
+		
+		alert("Closing of Tender Paper Selling Date should come before Bid Submission date.");
+		return false;
+	}
+	
+	
+	else{
+		return true;
+	}
+	
+	
+	
+	
+}
+</script>
 
 </head>
 <body>
       
 <h2>TENDER UPLOAD </h2>
 
-<form name="form1" action="register.htm" method="post" >
+<!-- <form name="form1" action="register.htm" method="post" onsubmit="return checkDate()">
+ -->
+  <form name="form1" action="show.htm" method="post" onsubmit="return checkDate()">
   
   <fieldset>
     

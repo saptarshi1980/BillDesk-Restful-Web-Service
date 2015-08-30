@@ -8,8 +8,8 @@ h1 { font-size: 1.5em; }
 </style>
 </head>
 <body>
-	<h1>Spring Multiple File Upload example</h1>
-	<p>Following files are uploaded successfully.</p>
+	<h1>Tender Information uploaded successfully with following Files:</h1>
+	
 	<ol>
 		<c:forEach items="${files}" var="file">
 			<li>${file}</li>
