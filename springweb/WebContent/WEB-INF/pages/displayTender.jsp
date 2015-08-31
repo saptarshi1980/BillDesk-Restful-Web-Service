@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Tender Details</title>
 
 </head>
 <body>
@@ -53,7 +53,14 @@ Tender Details<p>
         <c:forEach items="${categories.rowsByIndex}" var="row" begin="${start}" end="${stop}">
             <tr>
                 <c:forEach begin="0" end="${columns}" var="x">
+                    <%-- <td><c:out value="${row[x]}"/></td> --%>
+                    <c:choose>
+                    <c:when test="${x=='0'}"><td><a href="GetTenderFiles.htm?params=${row[x]}">Download Papers</td></a></c:when>
+                    
+                    <c:otherwise>
                     <td><c:out value="${row[x]}"/></td>
+                    </c:otherwise>
+                    </c:choose>
                 </c:forEach>
             </tr>
         </c:forEach>
