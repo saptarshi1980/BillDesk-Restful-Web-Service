@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import in.net.dpl.dao.TenderDAO;
+import in.net.dpl.model.TenderModel;
+import in.net.dpl.utility.TodayAsString;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
  
 /**
@@ -109,9 +114,33 @@ public class FileUploadController {
         return message;
     }
     @RequestMapping(value = "/show.htm", method = RequestMethod.POST)
-	public String displayForm(@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_vale,@RequestParam("datetimepicker_dark1") String opening_date,@RequestParam("datetimepicker_dark2") String closing_date,@RequestParam("datetimepicker_dark3") String prebid_date,@RequestParam("datetimepicker_dark4") String submission_date,@RequestParam("scope") String scope,HttpServletRequest request) {
-		request.getSession().setAttribute("tendergroup", tendergroup);
+	public String displayForm(@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_value,@RequestParam("datetimepicker_dark1") String opening_date,@RequestParam("datetimepicker_dark2") String closing_date,@RequestParam("datetimepicker_dark3") String prebid_date,@RequestParam("datetimepicker_dark4") String submission_date,@RequestParam("scope") String scope,HttpServletRequest request) {
+		request.setAttribute("tendergroup", tendergroup);
+		request.setAttribute("ref_no", ref_no);
+		request.setAttribute("tender_type", tender_type);
+		request.setAttribute("estimated_value", estimated_value);
+		request.setAttribute("opening_date", opening_date);
+		request.setAttribute("closing_date", closing_date);
+		request.setAttribute("prebid_date", prebid_date);
+		request.setAttribute("submission_date", submission_date);
+		request.setAttribute("scope", scope);
+		
+		
     	return "file_upload_form";
+	}
+    
+    @RequestMapping(value = "/checkRefNo.htm", method = RequestMethod.POST)
+	public @ResponseBody String findTender(@RequestParam("ref_no") String ref_no) {
+		
+    	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+    	TenderDAO tdao=(TenderDAO) ctx.getBean("tdao");
+    	
+    	TenderModel tmodel=new TenderModel();
+		System.out.println("Ref-"+ref_no);
+        tmodel.setTenderRefNo(ref_no);
+        int rowcount=tdao.findTender(tmodel);
+        System.out.println("ROW Count-"+rowcount);
+    	return String.valueOf(rowcount);
 	}
 	
 	
@@ -120,12 +149,10 @@ public class FileUploadController {
 					Model map) {
 		
 		List<MultipartFile> files = uploadForm.getFiles();
-
 		List<String> fileNames = new ArrayList<String>();
 		
 		if(null != files && files.size() > 0) {
 			for (MultipartFile multipartFile : files) {
-
 				//String fileName = multipartFile.getOriginalFilename();
 				if (!multipartFile.isEmpty()) {
 		            try {
@@ -156,7 +183,6 @@ public class FileUploadController {
 				
 				//fileNames.add(fileName);
 				//Handle file content - multipartFile.getInputStream()
-
 			}
 			
 		}
@@ -169,20 +195,45 @@ public class FileUploadController {
 	@RequestMapping(value = "/uploadMultipleFile.htm", method = RequestMethod.POST)
 	public String save(
             @ModelAttribute("uploadForm") FileUploadForm uploadForm,
-                    Model map,HttpServletRequest request) throws IllegalStateException, IOException {
-        System.out.println("Tender Group-"+request.getSession().getAttribute("tendergroup"));
+                    Model map,HttpServletRequest request,@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_value,@RequestParam("opening_date") String opening_date,@RequestParam("closing_date") String closing_date,@RequestParam("prebid_date") String prebid_date,@RequestParam("submission_date") String submission_date,@RequestParam("scope") String scope) throws IllegalStateException, IOException {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		TenderModel tmodel=new TenderModel();
+		System.out.println("Tender Group-"+tendergroup);
+		tmodel.setTenderGroup(tendergroup);
+		
+        System.out.println("Ref -"+ref_no);
+        tmodel.setTenderRefNo(ref_no);
+        System.out.println("Tender Type"+tender_type);
+        tmodel.setTenderType(tender_type);
+        System.out.println("Tender Group-"+tendergroup);
+        System.out.println("Estimay-"+estimated_value);
+        tmodel.setEstimatedValue(estimated_value);
+        
+        System.out.println("opening-"+opening_date);
+        tmodel.setOpeningDateTime(opening_date);
+        tmodel.setClosingDateTime(closing_date);
+        tmodel.setPrebidDateTime(prebid_date);
+        tmodel.setSubmissionDateTime(submission_date);
+        tmodel.setScope(scope);
+        
         List<MultipartFile> files = uploadForm.getFiles();
         System.out.println("Size-"+files.size());
+        
         List<String> fileNames = new ArrayList<String>();
          
         if(null != files && files.size() > 0) {
             for (MultipartFile multipartFile : files) {
  
-                String fileName = multipartFile.getOriginalFilename();
+                String fileName = new TodayAsString().todayWithTimeAsString()+"_"+multipartFile.getOriginalFilename();
                 System.out.println("File Name-"+fileName);
                 fileNames.add(fileName);
                 //Handle file content - multipartFile.getInputStream()
-                multipartFile.transferTo(new File(saveDirectory + multipartFile.getOriginalFilename()));   //Here I Added
+                
+                multipartFile.transferTo(new File(saveDirectory + fileName)); 
+                //Here I Added
+                TenderDAO tdao=(TenderDAO) ctx.getBean("tdao");
+                int status=tdao.saveTender(tmodel,fileName);  
+                System.out.println(status);
             }
         }
          
