@@ -3,6 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">      
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
+<style>
+  .red {
+    color: red;
+  }
+  </style>
 <head>
 	<title>DPL-Tender Entry</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
@@ -64,7 +69,37 @@ function checkDate(){
 	
 }
 </script>
+<script>
+$(document).ready(function() {
 
+	$('#ref_no').blur(function(){
+			//run the character number check
+			
+				check_availability();
+			
+		});
+
+  });
+
+//function to check username availability
+function check_availability(){
+
+		//get the username
+		var ref_no = $('#ref_no').val();
+
+		//use ajax to run the check
+		$.post("checkRefNo.htm", { ref_no: ref_no },
+			function(result){
+				//if the result is 1
+				if(result>0){
+					
+					$('#ref_availability_result').html("<span class='red'>Duplicate Tender Reference Number..</span>" );
+				}
+		});
+
+}
+
+</script>
 </head>
 <body>
       
@@ -104,7 +139,8 @@ function checkDate(){
       <label for="last_name"> 
       Tender Reference No</label>
       <input type="text" name="ref_no" value="" size="30" id="ref_no">
-      
+      <div id="ref_availability_result">
+      </div>
   </div>
     
     <div>
