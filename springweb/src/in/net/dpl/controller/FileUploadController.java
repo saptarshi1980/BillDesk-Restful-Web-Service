@@ -232,7 +232,9 @@ public class FileUploadController {
                 multipartFile.transferTo(new File(saveDirectory + fileName)); 
                 //Here I Added
                 TenderDAO tdao=(TenderDAO) ctx.getBean("tdao");
-                int status=tdao.saveTender(tmodel,fileName);  
+                int status=tdao.saveTender(tmodel,fileName);
+                int statusfile=tdao.saveTenderFile(tmodel,fileName);
+                
                 System.out.println(status);
             }
         }

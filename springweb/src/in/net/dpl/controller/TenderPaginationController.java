@@ -38,5 +38,14 @@ public class TenderPaginationController {
         	System.out.println("Inside");
         	return "displayTender";
 }
+    @RequestMapping("/GetTenderFiles.htm")
+    public String getTenderDetails(@RequestParam("params") String params) {
+    	
+    	
+    	
+    	return "";
+}
+    
+    
     
 }
