@@ -109,18 +109,8 @@ public class FileUploadController {
         return message;
     }
     @RequestMapping(value = "/show.htm", method = RequestMethod.POST)
-	public String displayForm(@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_value,@RequestParam("datetimepicker_dark1") String opening_date,@RequestParam("datetimepicker_dark2") String closing_date,@RequestParam("datetimepicker_dark3") String prebid_date,@RequestParam("datetimepicker_dark4") String submission_date,@RequestParam("scope") String scope,HttpServletRequest request) {
-		request.setAttribute("tendergroup", tendergroup);
-		request.setAttribute("ref_no", ref_no);
-		request.setAttribute("tender_type", tender_type);
-		request.setAttribute("estimated_value", estimated_value);
-		request.setAttribute("opening_date", opening_date);
-		request.setAttribute("closing_date", closing_date);
-		request.setAttribute("prebid_date", prebid_date);
-		request.setAttribute("submission_date", submission_date);
-		request.setAttribute("scope", scope);
-		
-		
+	public String displayForm(@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_vale,@RequestParam("datetimepicker_dark1") String opening_date,@RequestParam("datetimepicker_dark2") String closing_date,@RequestParam("datetimepicker_dark3") String prebid_date,@RequestParam("datetimepicker_dark4") String submission_date,@RequestParam("scope") String scope,HttpServletRequest request) {
+		request.getSession().setAttribute("tendergroup", tendergroup);
     	return "file_upload_form";
 	}
 	
@@ -179,13 +169,8 @@ public class FileUploadController {
 	@RequestMapping(value = "/uploadMultipleFile.htm", method = RequestMethod.POST)
 	public String save(
             @ModelAttribute("uploadForm") FileUploadForm uploadForm,
-                    Model map,HttpServletRequest request,@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_value,@RequestParam("opening_date") String opening_date,@RequestParam("closing_date") String closing_date,@RequestParam("prebid_date") String prebid_date,@RequestParam("submission_date") String submission_date,@RequestParam("scope") String scope) throws IllegalStateException, IOException {
-        System.out.println("Tender Group-"+tendergroup);
-        System.out.println("Ref -"+ref_no);
-        System.out.println("Tender Type"+tender_type);
-        System.out.println("Tender Group-"+tendergroup);
-        System.out.println("Estimay-"+estimated_value);
-        System.out.println("opening-"+opening_date);
+                    Model map,HttpServletRequest request) throws IllegalStateException, IOException {
+        System.out.println("Tender Group-"+request.getSession().getAttribute("tendergroup"));
         List<MultipartFile> files = uploadForm.getFiles();
         System.out.println("Size-"+files.size());
         List<String> fileNames = new ArrayList<String>();
