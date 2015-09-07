@@ -11,8 +11,15 @@ public class TenderModel {
 	String prebidDateTime=null;
 	String submissionDateTime=null;
 	String scope=null;
+	String fileName=null;
 	
 	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public String getTenderGroup() {
 		return tenderGroup;
 	}

@@ -1,14 +1,23 @@
 package in.net.dpl.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 
+import in.net.dpl.model.TenderFileRowMapper;
 import in.net.dpl.model.TenderModel; 
 
 public class TenderDAO {
 
 	private JdbcTemplate jdbcTemplate; 
 	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {  
 	    this.jdbcTemplate = jdbcTemplate;  
 	}  
@@ -35,6 +44,27 @@ public class TenderDAO {
 		System.out.println("Row count-"+rowCount);			
 		//return total;
 		return rowCount;
+	}
+	
+	public List<String> findTenderFile(String params){  
+		String sql = "SELECT file_name FROM TENDERMASTERNEW WHERE concat(TENDER_REF_NO,date_format(tender_upload_date,'%d-%m-%y'))='"+params+"'";
+		List<String> tms = new ArrayList<String>();
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		for (Map row : rows) {
+			
+			            //String tm = new String();
+			            //tm.setFileName(String.valueOf(row.get("file_name")));
+			            tms.add(String.valueOf(row.get("file_name")));
+			
+			        }
+			
+			      
+			
+			        return tms;
+
+
+		//return getJdbcTemplate().queryForList(sql);
+		
 	}
 	
 }
