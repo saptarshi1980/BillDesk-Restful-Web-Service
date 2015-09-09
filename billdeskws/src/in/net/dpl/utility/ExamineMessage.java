@@ -32,7 +32,7 @@ public class ExamineMessage {
     String errorDescription=null;
     String ChecksumKey ="a3VkNtgWZNwu";
     
-    public void examineMsg(String msg){
+    public String examineMsg(String msg){
     	StringBuffer sbmsg=new StringBuffer(msg);
 		String checksumBD=msg.substring(msg.lastIndexOf("|")+1, msg.length());
 		String originalMsg=msg.substring(0,msg.lastIndexOf("|"));
@@ -44,12 +44,18 @@ public class ExamineMessage {
 		
 		if(checksumBD.matches(checkSumDPL)){
 			System.out.println("Checksum Matched, Authorised Transaction. Transaction Reports will be updated");
+			extractString(originalMsg);
+			//INSERT RECORD HERE
+			
+			return "SUCCESS";
 			
 		}
 		else{
 			System.out.println("Checksum Mis Match, Transaction Declined. ");
+			return "FALSE";
+			
 		}
-		extractString(originalMsg);
+		
 		
 		
 	}

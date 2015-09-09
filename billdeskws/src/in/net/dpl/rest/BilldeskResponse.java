@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import in.net.dpl.utility.ExamineMessage;
  
 @Path("/direct")
 public class BilldeskResponse {
@@ -22,6 +24,7 @@ public class BilldeskResponse {
 		@FormParam("msg") String msg) {
 		System.out.println("MSG-"+msg);
 		//return Response.status(200).entity("MSG is called, name : " + msg).build();
+		String status=new ExamineMessage().examineMsg(msg);
 		return "200";
 		
 
