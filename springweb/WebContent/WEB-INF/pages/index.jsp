@@ -34,7 +34,7 @@ $(document).ready(function(){
 				<li><a href="#">Menu Item 2</a></li>
 				<li><a href="#">Menu Item 3</a></li>
 				<li><a href="#">Menu Item 4</a></li>
-				<li><a href="#">Menu Item 5</a></li>
+				<li><a href="tenderLogin.htm">Tender Upload</a></li>
 			</ul>
 			<div id="gsearch">
 			<form action="http://www.google.com/search" target="_blank">

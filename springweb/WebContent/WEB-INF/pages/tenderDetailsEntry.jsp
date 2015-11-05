@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">      
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <html lang="en">
 <style>
   .red {
@@ -107,7 +108,7 @@ function check_availability(){
  
     <div>
       <label for="first_name">Tender Group</label>
-      <select name="tendergroup">
+      <!-- <select name="tendergroup">
               <option>Coke Oven Group of Plants</option>
               <option selected="selected">Power Plant</option>
               <option>Water Works</option>
@@ -124,7 +125,9 @@ function check_availability(){
               <option>Stores &amp; Purchase-Corp</option>
               <option>IT Cell</option>
               <option>Power Plant</option>
-            </select>
+            </select> -->
+            <input type="text" name="tendergroup" value="<c:out value="${deptName}" />" size="30" id="tendergroup" readonly>
+            
   </div> 
   
     <div>

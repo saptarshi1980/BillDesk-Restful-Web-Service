@@ -67,4 +67,24 @@ public class TenderDAO {
 		
 	}
 	
+	public String tenderLoginAuth(String user_id,String password){  
+		String sql = "SELECT a.user_id AS user_id,b.dept_name AS dept_name FROM tender_user a,dept_master b WHERE a.user_id='"+user_id+"' AND a.password='"+password+"' AND a.dept_id=b.dept_id";
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		int counter=0;
+		String deptName=null;
+		String userId=null;
+		for (Map row : rows) {
+						deptName=String.valueOf(row.get("dept_name"));
+			            counter++;
+			}
+			if(counter>0){
+				return deptName;
+			}
+			      
+			
+			else return "UNAUTHORIZED";
+		
+	}
+	
+	
 }
