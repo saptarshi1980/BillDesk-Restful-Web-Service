@@ -28,12 +28,14 @@ $(document).ready(function(){
 <div id="page">
 	<div id="header">
 		<div id="logo"><a href="#"><img src="<c:url value="/resources/images/logo_dpl.jpg" />" alt="" width="325" height="65"></a></div>
+		<p></p>
 		<div id="basicnav">
 			<ul id="sitenav">
-				<li class="nospace"><a href="#">Menu Item 1</a></li>
-				<li><a href="#">Menu Item 2</a></li>
-				<li><a href="#">Menu Item 3</a></li>
-				<li><a href="#">Menu Item 4</a></li>
+				<li class="nospace"><a href="#">HR Upload</a></li>
+ 				<li><a href="#">Recent Solutions Upload</a></li>
+ 				<li><a href="#">News & Updates Upload</a></li>
+				<li><a href="#">Tariff Upload</a></li>
+				<li><a href="#">PDF Upload</a></li>
 				<li><a href="tenderLogin.htm">Tender Upload</a></li>
 			</ul>
 			<div id="gsearch">
@@ -118,10 +120,11 @@ $(document).ready(function(){
          <li class='last'><a href="aboutDPL.jsp"><span>About DPL</span></a> </li>
       </ul>
    </li>
-   <li class='active has-sub'><a href='#'><span>Tenders & Bids</span></a>
+   <li class='active has-sub'><a href='#'><span>Tenders</span></a>
       <ul>
-         <li class='last'><a href="#"><span>Menu Item</span></a> </li>
-         <li class='last'><a href="#"><span>Menu Item</span></a> </li>
+         <li class='last'><a href="#"><span>Tender List</span></a> </li>
+         <li class='last'><a href="tenderLogin.htm"><span>Tender Upload</span></a> </li>
+         
       </ul>
    </li>
    <li class='active has-sub'><a href='#'><span>Administration</span></a>
@@ -203,11 +206,11 @@ $(document).ready(function(){
 			</div>
 			<div id="program_links">
 				<ul>
-					<li class="title">Link</li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
+					<li class="title"></li>
+					<li><a href="#">Downloads</a></li>
+					<li><a href="#">Tenders</a></li>
+					<li><a href="#">Recent News</a></li>
+					<li><a href="#">Notice Board</a></li>
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
@@ -220,9 +223,7 @@ $(document).ready(function(){
 				<div class="columnarea" align="justify">
 					<div class="twocol_leftlong" align="justify">
 						<p>
-						<strong>DPL's Coke Oven Complex is India's one of the largest Merchant Cokery producing Coke of global quality. The current installed capacity of the Coke Oven Complex is 0.5 million tonnes of Gross Coke per annum, 20,000 tonnes of Crude Coal Tar per annum and 90 million NM 3 of Coke Oven gas per annum.
-<br /><br></br>
-The DPL plant has Rail/Highway/Road linkages to cities of Kolkata, Siliguri, Dhanbad and Delhi and sea port at Haldia.</strong> 
+						<strong>The Durgapur Projects Ltd (DPL), a five-decade-old multi-utility growth propeller, is one of the major planks of expansion and prosperity of West Bengal's industrial belt Durgapur. The Durgapur Projects Ltd was incorporated on 6th September, 1961 and consists of Coke Oven Batteries, Bye-products Plant, Gas Grid Project, Thermal Power Plant and Water Works. It is under the administrative control of the Department of Power and Non-conventional Energy Sources, Government of West Bengal. The Durgapur Projects Ltd  is  the first undertaking of  the  State Government  which has been engaged in  development of infrastructure  for  Industries and  was given the stature of an "Industry for Industries". Its main objective was to promote development of various large, medium and small scale industries in and around Durgapur and also at other places within the State.</strong> 
 						</p>
 					</div>
 					<div class="twocol_rightshort">
@@ -270,7 +271,7 @@ The DPL plant has Rail/Highway/Road linkages to cities of Kolkata, Siliguri, Dha
 		</div>
 	</div>
 			<div id="program_links">
-				<h1 class="first_element"><strong>Recent News</strong></h1>
+				<h1 class="first_element"><strong>News & Updates </strong></h1>
 				A <br>
 				B<br>
 				C<br>
