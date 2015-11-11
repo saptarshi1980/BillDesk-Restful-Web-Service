@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import in.net.dpl.dao.FileDAO;
 import in.net.dpl.dao.TenderDAO;
 import in.net.dpl.model.TenderModel;
 import in.net.dpl.utility.TodayAsString;
@@ -113,20 +114,11 @@ public class FileUploadController {
         }
         return message;
     }
-    @RequestMapping(value = "/show.htm", method = RequestMethod.POST)
-	public String displayForm(@RequestParam("tendergroup") String tendergroup,@RequestParam("ref_no") String ref_no,@RequestParam("tender_type") String tender_type,@RequestParam("estimated_value") String estimated_value,@RequestParam("datetimepicker_dark1") String opening_date,@RequestParam("datetimepicker_dark2") String closing_date,@RequestParam("datetimepicker_dark3") String prebid_date,@RequestParam("datetimepicker_dark4") String submission_date,@RequestParam("scope") String scope,HttpServletRequest request) {
-		request.setAttribute("tendergroup", tendergroup);
-		request.setAttribute("ref_no", ref_no);
-		request.setAttribute("tender_type", tender_type);
-		request.setAttribute("estimated_value", estimated_value);
-		request.setAttribute("opening_date", opening_date);
-		request.setAttribute("closing_date", closing_date);
-		request.setAttribute("prebid_date", prebid_date);
-		request.setAttribute("submission_date", submission_date);
-		request.setAttribute("scope", scope);
-		
-		
-    	return "file_upload_form";
+    @RequestMapping(value = "/fileshow.htm", method = RequestMethod.POST)
+	public String displayForm(@RequestParam("title") String title,@RequestParam("description") String description,HttpServletRequest request) {
+		request.setAttribute("title", title);
+		request.setAttribute("description", description);
+    	return "pdf_upload_form";
 	}
     
     @RequestMapping(value = "/checkRefNo.htm", method = RequestMethod.POST)
@@ -240,6 +232,42 @@ public class FileUploadController {
         }
          
         map.addAttribute("files", fileNames);
+        return "file_upload_success";
+    }
+	
+
+	
+	@RequestMapping(value = "/uploadMultiplePdfFile.htm", method = RequestMethod.POST)
+	public String savePdf(@ModelAttribute("uploadForm") FileUploadForm uploadForm,
+                    Model map,HttpServletRequest request,@RequestParam("title") String title,@RequestParam("description") String description) throws IllegalStateException, IOException {
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		String saveDirectory = "C:/uploads/pdf/";
+        List<MultipartFile> files = uploadForm.getFiles();
+        System.out.println("Size-"+files.size());
+        String id=new TodayAsString().todayWithTimeAsString();
+        FileDAO fdao=(FileDAO) ctx.getBean("fdao");
+        int status=fdao.savePdf(title,description,id);
+        
+        List<String> fileNames = new ArrayList<String>();
+         
+        if(null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
+ 
+                String fileName = new TodayAsString().todayWithTimeAsString()+"_"+multipartFile.getOriginalFilename();
+                System.out.println("File Name-"+fileName);
+                fileNames.add(fileName);
+                //Handle file content - multipartFile.getInputStream()
+                
+                multipartFile.transferTo(new File(saveDirectory + fileName)); 
+                //Here I Added
+                
+                int statusfile=fdao.savePdfFile(id,fileName);
+                
+                System.out.println(status);
+            }
+        }
+         
+        //map.addAttribute("files", fileNames);
         return "file_upload_success";
     }
 }

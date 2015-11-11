@@ -61,6 +61,17 @@ public class TenderPaginationController {
     	return model;
 }
 
+    @RequestMapping(value="/listDeptTender.htm",method = RequestMethod.GET)
+    public ModelAndView getDeptTender(@RequestParam("params") String params) {
+    	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+    	//TenderDAO tdao=(TenderDAO) ctx.getBean("tdao");
+    	//List<String> tms = tdao.findTenderFile(params);
+    	//System.out.println(tms); 
+    	ModelAndView model = new ModelAndView("paginationTender");
+    	model.addObject("params",params);
+       	return model;
+}
+    
     public String right(String str, int len) {
         if (str == null) {
             return null;

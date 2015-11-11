@@ -40,4 +40,70 @@ public class FileDownloadController {
 	        e.printStackTrace();
 	    }	
 }
+	
+	@RequestMapping("/downloadPdf.htm")
+    public void doDownloadPdf(@RequestParam("file_name") String file_name,HttpServletResponse response) {
+	      
+	try {
+        String filePathToBeServed = "C:/uploads/pdf/"+file_name;
+        File fileToDownload = new File(filePathToBeServed);
+        InputStream inputStream = new FileInputStream(fileToDownload);
+        response.setContentType("application/force-download");
+        response.setHeader("Content-Disposition", "attachment; filename="+file_name+".pdf"); 
+        IOUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
+        inputStream.close();
+    }catch (IOException e){
+        
+        e.printStackTrace();
+    } 
+	catch (Exception e){
+        
+        e.printStackTrace();
+    }	
+}
+	
+	@RequestMapping("/downloadHr.htm")
+    public void doDownloadHr(@RequestParam("file_name") String file_name,HttpServletResponse response) {
+	      
+	try {
+        String filePathToBeServed = "C:/uploads/pdf/"+file_name;
+        File fileToDownload = new File(filePathToBeServed);
+        InputStream inputStream = new FileInputStream(fileToDownload);
+        response.setContentType("application/force-download");
+        response.setHeader("Content-Disposition", "attachment; filename="+file_name+".pdf"); 
+        IOUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
+        inputStream.close();
+    }catch (IOException e){
+        
+        e.printStackTrace();
+    } 
+	catch (Exception e){
+        
+        e.printStackTrace();
+    }	
+}
+	
+	@RequestMapping("/downloadTariff.htm")
+    public void doDownloadTariff(@RequestParam("file_name") String file_name,HttpServletResponse response) {
+	      
+	try {
+        String filePathToBeServed = "C:/uploads/pdf/"+file_name;
+        File fileToDownload = new File(filePathToBeServed);
+        InputStream inputStream = new FileInputStream(fileToDownload);
+        response.setContentType("application/force-download");
+        response.setHeader("Content-Disposition", "attachment; filename="+file_name+".pdf"); 
+        IOUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
+        inputStream.close();
+    }catch (IOException e){
+        
+        e.printStackTrace();
+    } 
+	catch (Exception e){
+        
+        e.printStackTrace();
+    }	
+}
 }

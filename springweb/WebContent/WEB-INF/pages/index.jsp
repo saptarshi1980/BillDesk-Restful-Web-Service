@@ -31,11 +31,11 @@ $(document).ready(function(){
 		<p></p>
 		<div id="basicnav">
 			<ul id="sitenav">
-				<li class="nospace"><a href="#">HR Upload</a></li>
+				<li class="nospace"><a href="hrUploadLogin.htm">HR Upload</a></li>
  				<li><a href="#">Recent Solutions Upload</a></li>
  				<li><a href="#">News & Updates Upload</a></li>
-				<li><a href="#">Tariff Upload</a></li>
-				<li><a href="#">PDF Upload</a></li>
+				<li><a href="tariffUploadLogin.htm">Tariff Upload</a></li>
+				<li><a href="fileUploadLogin.htm">PDF Upload</a></li>
 				<li><a href="tenderLogin.htm">Tender Upload</a></li>
 			</ul>
 			<div id="gsearch">
@@ -98,14 +98,14 @@ $(document).ready(function(){
          <li class='last'><a href="#"><span>View Prev. Bill</span></a> </li>
          <li class='last'><a href="#"><span>Download e-Payment Rcpt.</span></a> </li>
          <li class='last'><a href="#"><span>Download e-Payment Rcpt.</span></a> </li>
-         <li class='last'><a href="#"><span>Tariff</span></a> </li>
+         <li class='last'><a href="listTariff.htm"><span>Tariff</span></a> </li>
       </ul>
    </li>
    <li class='active has-sub'><a href='#'><span>HRD</span></a>
       <ul>
          <li class='last'><a href="#"><span>Job Openings</span></a> </li>
          <li class='last'><a href="#"><span>Results</span></a> </li>
-         <li class='last'><a href="#"><span>Orders & Circulars</span></a> </li>
+         <li class='last'><a href="listHr.htm"><span>Orders & Circulars</span></a> </li>
       </ul>
    </li>
    <li class='active has-sub'><a href='#'><span>About DPL</span></a>
@@ -122,7 +122,7 @@ $(document).ready(function(){
    </li>
    <li class='active has-sub'><a href='#'><span>Tenders</span></a>
       <ul>
-         <li class='last'><a href="#"><span>Tender List</span></a> </li>
+         <li class='last'><a href="tenderList.htm"><span>Tender List</span></a> </li>
          <li class='last'><a href="tenderLogin.htm"><span>Tender Upload</span></a> </li>
          
       </ul>
@@ -207,11 +207,11 @@ $(document).ready(function(){
 			<div id="program_links">
 				<ul>
 					<li class="title"></li>
-					<li><a href="#">Downloads</a></li>
-					<li><a href="#">Tenders</a></li>
+					<li><a href="listPdf.htm">Downloads</a></li>
+					<li><a href="tenderList.htm">Tenders</a></li>
 					<li><a href="#">Recent News</a></li>
 					<li><a href="#">Notice Board</a></li>
-					<li><a href="#">Link</a></li>
+					<li><a href="listTariff.htm">Tariff</a></li>
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
 				</ul>

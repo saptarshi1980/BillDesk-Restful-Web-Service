@@ -1,3 +1,4 @@
+
 package in.net.dpl.model;
 
 public class TenderModel {
@@ -12,6 +13,7 @@ public class TenderModel {
 	String submissionDateTime=null;
 	String scope=null;
 	String fileName=null;
+	String count=null;
 	
 	
 	public String getFileName() {
@@ -74,5 +76,12 @@ public class TenderModel {
 	public void setScope(String scope) {
 		this.scope = scope;
 	}
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	
 	
 }

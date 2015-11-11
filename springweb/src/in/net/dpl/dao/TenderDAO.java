@@ -86,5 +86,24 @@ public class TenderDAO {
 		
 	}
 	
+	public List<TenderModel> tenderList(){  
+		String sql = "SELECT tender_group,COUNT(*) AS tender_count FROM tendermasternew GROUP BY tender_group ORDER BY tender_group";
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		List<TenderModel> ltm=new ArrayList<TenderModel>();
+		
+		int counter=0;
+		String deptName=null;
+		String userId=null;
+		for (Map row : rows) {
+						TenderModel tm=new TenderModel();
+						tm.setTenderGroup(String.valueOf(row.get("tender_group")));
+						tm.setCount(String.valueOf(row.get("tender_count")));
+			            ltm.add(tm);
+			}
+			
+	     return ltm;
+		
+	}
+	
 	
 }

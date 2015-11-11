@@ -22,7 +22,17 @@
 	</bean> 
 	<bean id="tdao" class="in.net.dpl.dao.TenderDAO">  
 	<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+	</bean>
+	<bean id="fdao" class="in.net.dpl.dao.FileDAO">  
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
 	</bean>   
+	<bean id="hrdao" class="in.net.dpl.dao.HrDAO">  
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+	</bean>
+	<bean id="tariffdao" class="in.net.dpl.dao.TariffDAO">  
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+	</bean>
+	
     
     
 

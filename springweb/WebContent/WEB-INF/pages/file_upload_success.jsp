@@ -8,7 +8,7 @@ h1 { font-size: 1.5em; }
 </style>
 </head>
 <body>
-	<h1>Tender Information uploaded successfully with following Files:</h1>
+	<h1>Files uploaded successfully:</h1>
 	
 	<ol>
 		<c:forEach items="${files}" var="file">
